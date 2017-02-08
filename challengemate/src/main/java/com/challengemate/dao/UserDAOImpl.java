@@ -7,7 +7,6 @@ import com.challengemate.model.User;
 @Repository("userDAO")
 public class UserDAOImpl implements UserDAO {
 
-	@Override
 	public int registerUser(User user) {
 		return 1;
 	}
