@@ -32,13 +32,8 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User getUserInfo(String fbUserId) {
-		User user = new User();
-		user.setFbuserid("fbuserid");
-		// user.setDateOfBirth(LocalDate.now());
-		user.setEmail("yogiverma1991@gmail.com");
-		user.setMobile(9996868766l);
-		user.setName("yoyo");
-		user.setProfilePic("\\j\\k\\k\\abc.jpg");
+		Session session = sessionFactory.openSession();
+		User user  = (User) session.get(User.class, fbUserId);
 		return user;
 	}
 }
