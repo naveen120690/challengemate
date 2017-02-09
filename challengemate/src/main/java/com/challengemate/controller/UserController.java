@@ -1,5 +1,7 @@
 package com.challengemate.controller;
 
+import javax.websocket.server.PathParam;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,17 +27,33 @@ public class UserController {
 		return "hiiiii world";
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "registeruser", 
-			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.POST, value = "registeruser", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String registerUser(@RequestBody User user) {
 		System.out.println(user);
 		JSONObject gson = new JSONObject();
-		int retVal = userService.registerUser(user);
-		if (retVal == 1)
-			gson.put("status", "success");
-		else
-			gson.put("status", "fail");
+		try {
+			int i = userService.registerUser(user);
+			if (i == 0) {
+				gson.put("status", "success");
+
+			} else {
+				gson.put("status", "failure");
+			}
+		} catch (Exception e) {
+			if(e instanceof com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException) {
+				gson.put("status", "failure");
+				gson.put("cause", "Duplicate Data");
+			}
+
+		}
+
 		return gson.toString();
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "userinfo/{userid}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String getUserInfo(@PathParam(value = "userid") String fbuserId) {
+
+		return "";
 	}
 
 }

@@ -4,26 +4,45 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	@Id
+	@Column(name = "fbuserid", nullable = false)
 	private String fbuserid;
+
+	@Column(name = "mobile")
 	private Long mobile;
+
+	@Column(name = "email")
 	private String email;
-	private LocalDate dateOfBirth;
+
+	@Column(name = "dob")
+	private String dateOfBirth;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "profilepic")
 	private String profilePic;
-	private LocalDateTime dateTime;
+
+	@Column(name = "datetime")
+	private String dateTime;
 
 	public User() {
 	}
 
-	public User(Long id, String fbuserid, Long mobile, String email, LocalDate dateOfBirth, String name,
-			String profilePic, LocalDateTime dateTime) {
+	public User(String fbuserid, Long mobile, String email, String dateOfBirth, String name, String profilePic,
+			String dateTime) {
 		super();
-		this.id = id;
 		this.fbuserid = fbuserid;
 		this.mobile = mobile;
 		this.email = email;
@@ -31,14 +50,6 @@ public class User implements Serializable {
 		this.name = name;
 		this.profilePic = profilePic;
 		this.dateTime = dateTime;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getFbuserid() {
@@ -65,11 +76,11 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public LocalDate getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -89,11 +100,11 @@ public class User implements Serializable {
 		this.profilePic = profilePic;
 	}
 
-	public LocalDateTime getDateTime() {
+	public String getDateTime() {
 		return dateTime;
 	}
 
-	public void setDateTime(LocalDateTime dateTime) {
+	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
 
@@ -101,8 +112,9 @@ public class User implements Serializable {
 		return serialVersionUID;
 	}
 
-	/*public String toString() {
-	String s = "id:" + id + ", name: " + name;
-	return s;
-	}*/
+	public String toString() {
+		String s = "fbuserid:" + fbuserid + ", mobile: " + mobile + ", email: " + email + ", dateOfBirth: "
+				+ dateOfBirth + ", name: " + name + ", profilePic: " + profilePic + ", dateTime: " + dateTime;
+		return s;
+	}
 }
