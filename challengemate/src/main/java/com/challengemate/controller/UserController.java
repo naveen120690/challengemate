@@ -1,5 +1,6 @@
 package com.challengemate.controller;
 
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.challengemate.model.User;
 import com.challengemate.service.UserService;
+import com.challengemate.utils.LogManager;
 
 @Controller
 @RequestMapping(value = "/user/")
@@ -28,6 +30,7 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "registeruser", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String registerUser(@RequestBody User user) {
+
 		System.out.println(user);
 		JSONObject gson = new JSONObject();
 		try {
@@ -49,6 +52,11 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET, value = "userinfo/{userid}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String getUserInfo(@PathVariable(value = "userid") String fbuserId) {
 		System.out.println(fbuserId);
+		Logger debug = LogManager.getLogger("debugLog");
+		Logger error = LogManager.getLogger("errorLog");
+		System.out.println(debug + "$$$$" + error);
+		debug.debug("debug Logs......");
+		error.error("Error Logs......");
 		JSONObject gson = new JSONObject();
 		User user = this.userService.getUserInfo(fbuserId);
 		if (user == null)

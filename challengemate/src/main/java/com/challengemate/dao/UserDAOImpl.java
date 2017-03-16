@@ -33,7 +33,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUserInfo(String fbUserId) {
 		Session session = sessionFactory.openSession();
-		User user  = (User) session.get(User.class, fbUserId);
+		User user  = (User) session.get(User.class, fbUserId); 	
 		return user;
 	}
 }

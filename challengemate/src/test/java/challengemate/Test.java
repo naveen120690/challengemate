@@ -11,8 +11,8 @@ public class Test {
 
 	public static void main(String[] args) {
 		User user = new User();
-		//user.setDateOfBirth();
-		//user.setDateTime();
+		user.setDateOfBirth("2017-09-02");
+		user.setDateTime("2017-09-02 04:04:04");
 		user.setEmail("yogiverma1991@gmail.com");
 		user.setFbuserid("one");
 		user.setMobile(9996868768l);
